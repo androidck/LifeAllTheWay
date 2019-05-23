@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/view_title"/>
+    <include layout="@layout/division_line"/>
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:paddingLeft="@dimen/space_70"
+        android:paddingRight="@dimen/space_70"
+        android:orientation="vertical"
+        >
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_100"
+            android:layout_marginTop="@dimen/space_100"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/tv_tip"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="我们已向15698016335发送验证码短信"
+                android:gravity="center_horizontal"
+                android:textColor="@color/textColors"
+                android:textSize="@dimen/font_size_30px"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="请查看并输入短信验证码"
+                android:gravity="center"
+                android:textColor="@color/textColors"
+                android:textSize="@dimen/font_size_28px"
+                />
+        </com.zhy.autolayout.AutoLinearLayout>
+        <com.cloundwisdom.im.common.view.PhoneCode
+            android:id="@+id/ed_code"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_100"
+            android:layout_marginTop="@dimen/space_200"
+            />
+
+
+        <TextView
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_80"
+            android:layout_marginLeft="@dimen/space_50"
+            android:layout_marginRight="@dimen/space_50"
+            android:layout_marginTop="@dimen/space_50"
+            android:gravity="center"
+            android:text="@string/new_send_msg"
+            android:textColor="@color/colorAccent"
+            />
+
+    </com.zhy.autolayout.AutoLinearLayout>
+</com.zhy.autolayout.AutoLinearLayout>

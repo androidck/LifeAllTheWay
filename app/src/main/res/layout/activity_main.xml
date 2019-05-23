@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".modules.ui.main.MainActivity"
+    android:background="@android:color/white"
+
+    >
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        >
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/line"
+            ></android.support.v4.view.ViewPager>
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_1"
+            android:background="#f0f0f0"
+            android:layout_above="@id/lay_menu"
+            />
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/lay_menu"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_110"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:clipChildren="false"
+            android:background="@android:color/white"
+            >
+            <RadioGroup
+                android:id="@+id/menu_group"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                >
+                <RadioButton
+                    android:id="@+id/rb_home"
+                    style="@style/style_RadioButton"
+                    android:checked="true"
+                    android:layout_marginTop="@dimen/space_10"
+                    android:layout_marginBottom="@dimen/space_10"
+                    android:drawableTop="@drawable/rb_home_selector"
+                    android:text="@string/fragment_home" />
+
+                <RadioButton
+                    android:id="@+id/rb_find"
+                    style="@style/style_RadioButton"
+                    android:drawableTop="@drawable/rb_mall_selector"
+                    android:layout_marginTop="@dimen/space_10"
+                    android:layout_marginBottom="@dimen/space_10"
+                    android:text="@string/fragment_shopping_mall" />
+                <RadioButton
+                    android:id="@+id/rb_group_chat"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_120"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/space_30"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:button="@null"
+                    android:drawableTop="@drawable/rb_group_chat_selector"
+                    android:gravity="center"
+                    android:drawablePadding="@dimen/space_10"
+                    android:text="@string/group_chat_fragment"
+                    android:textSize="@dimen/font_size_24px"
+                    android:textColor="@drawable/rb_focus_color"
+                    />
+
+                <RadioButton
+                    android:id="@+id/rb_extension"
+                    style="@style/style_RadioButton"
+                    android:drawableTop="@drawable/rb_find_selector"
+                    android:layout_marginTop="@dimen/space_10"
+                    android:layout_marginBottom="@dimen/space_10"
+                    android:text="@string/fragment_find" />
+
+                <RadioButton
+                    android:id="@+id/rb_my"
+                    style="@style/style_RadioButton"
+                    android:drawableTop="@drawable/rb_my_selector"
+                    android:layout_marginTop="@dimen/space_10"
+                    android:layout_marginBottom="@dimen/space_10"
+                    android:text="@string/fragment_mine" />
+            </RadioGroup>
+        </com.zhy.autolayout.AutoLinearLayout>
+
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+
+
+</com.zhy.autolayout.AutoLinearLayout>

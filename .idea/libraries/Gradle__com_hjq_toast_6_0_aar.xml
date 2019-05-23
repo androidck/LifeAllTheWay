@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.hjq:toast:6.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ad17e8b5494972fcc5269ff46ade76c5/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ad17e8b5494972fcc5269ff46ade76c5/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.hjq/toast/6.0/f951889adf379008012a0f40fd35e7d0434df007/toast-6.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

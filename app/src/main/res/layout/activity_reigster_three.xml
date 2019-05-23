@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/view_title"/>
+    <include layout="@layout/division_line"/>
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:paddingLeft="@dimen/space_70"
+        android:paddingRight="@dimen/space_70"
+        android:orientation="vertical"
+        >
+        <ImageView
+            android:layout_width="@dimen/space_200"
+            android:layout_height="@dimen/space_200"
+            android:src="@mipmap/ic_launcher"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/space_100"
+            />
+        <com.hjq.widget.ClearEditText
+            android:id="@+id/ed_phone"
+            android:hint="请输入推荐人手机号"
+            android:inputType="number"
+            android:maxLength="13"
+            style="@style/login_register"
+            android:layout_marginTop="@dimen/space_70"
+            />
+        <include layout="@layout/division_line"/>
+
+        <com.hjq.widget.ClearEditText
+            android:id="@+id/ed_pwd"
+            android:hint="请输入密码"
+            style="@style/login_register"
+            android:inputType="textPassword"
+            />
+        <include layout="@layout/division_line"/>
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_80"
+            android:background="@drawable/share_btn"
+            android:layout_marginLeft="@dimen/space_50"
+            android:layout_marginRight="@dimen/space_50"
+            android:layout_marginTop="@dimen/space_100"
+            android:text="@string/success_register"
+            android:textColor="@android:color/white"
+            />
+
+    </com.zhy.autolayout.AutoLinearLayout>
+</com.zhy.autolayout.AutoLinearLayout>
