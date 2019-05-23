@@ -21,4 +21,6 @@ public class KeyConstant {
     /** 项目id **/
     public static String PROJECT_APP_ID="e18911500bd243e390fb32d86adf1076";
 
+
+    public static String USER_ID="b28fc6714528434d83f06e8e56e978b0";
 }

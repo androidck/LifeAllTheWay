@@ -2,7 +2,7 @@
 <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@android:color/white"
     >
     <com.stx.xhb.xbanner.XBanner
@@ -22,4 +22,184 @@
         android:textSize="@dimen/font_size_30px"
         android:layout_height="@dimen/space_60" />
     <include layout="@layout/divisions_line"/>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_160"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="在线办卡"
+            android:textSize="@dimen/font_size_30px"
+            android:textColor="@color/textColors"
+            android:gravity="center"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="快速借款"
+            android:textSize="@dimen/font_size_30px"
+            android:textColor="@color/textColors"
+            android:gravity="center"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="卡生活"
+            android:textSize="@dimen/font_size_30px"
+            android:textColor="@color/textColors"
+            android:gravity="center"
+            />
+    </com.zhy.autolayout.AutoLinearLayout>
+    <include layout="@layout/divisions_line"/>
+    <!-- 畅游1录 -->
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_280"
+        android:orientation="vertical"
+        >
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_70"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:drawablePadding="@dimen/space_16"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/space_30"
+                android:paddingRight="@dimen/space_30"
+                android:text="畅游一路"
+                android:textColor="@color/textColors"
+                android:textSize="@dimen/space_30" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="了解一路金服产品"
+                android:textSize="@dimen/space_30"
+                android:textColor="@color/tipColor"
+                android:gravity="center_vertical|right"
+                android:drawableRight="@mipmap/user_open"
+                android:paddingLeft="@dimen/space_30"
+                android:paddingRight="@dimen/space_30"
+                android:background="@android:color/white"
+                android:drawablePadding="@dimen/space_16"
+                />
+
+        </com.zhy.autolayout.AutoLinearLayout>
+        <include layout="@layout/division_line"/>
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></com.zhy.autolayout.AutoLinearLayout>
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <include layout="@layout/divisions_line"/>
+    <!-- 好卡推荐 -->
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_280"
+        android:orientation="vertical"
+        >
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_70"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:drawablePadding="@dimen/space_16"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/space_30"
+                android:paddingRight="@dimen/space_30"
+                android:text="好卡推荐"
+                android:textColor="@color/textColors"
+                android:textSize="@dimen/space_30" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="查看更多"
+                android:textSize="@dimen/space_30"
+                android:textColor="@color/tipColor"
+                android:gravity="center_vertical|right"
+                android:drawableRight="@mipmap/user_open"
+                android:paddingLeft="@dimen/space_30"
+                android:paddingRight="@dimen/space_30"
+                android:background="@android:color/white"
+                android:drawablePadding="@dimen/space_16"
+                />
+        </com.zhy.autolayout.AutoLinearLayout>
+        <include layout="@layout/division_line"/>
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/card_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        </com.zhy.autolayout.AutoLinearLayout>
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <include layout="@layout/divisions_line"/>
+    <!-- 贷款超市 -->
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_70"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:drawablePadding="@dimen/space_16"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/space_30"
+                android:paddingRight="@dimen/space_30"
+                android:text="贷款超市"
+                android:textColor="@color/textColors"
+                android:textSize="@dimen/space_30" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="查看更多"
+                android:textSize="@dimen/space_30"
+                android:textColor="@color/tipColor"
+                android:gravity="center_vertical|right"
+                android:drawableRight="@mipmap/user_open"
+                android:paddingLeft="@dimen/space_30"
+                android:paddingRight="@dimen/space_30"
+                android:background="@android:color/white"
+                android:drawablePadding="@dimen/space_16"
+                />
+        </com.zhy.autolayout.AutoLinearLayout>
+        <include layout="@layout/division_line"/>
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/loan_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+        </com.zhy.autolayout.AutoLinearLayout>
+    </com.zhy.autolayout.AutoLinearLayout>
+
 </com.zhy.autolayout.AutoLinearLayout>

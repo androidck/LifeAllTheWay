@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cloundwisdom.im.common.web.BrowserActivity;
+import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import com.hjq.base.web.SonicJavaScriptInterface;
 import com.hjq.toast.ToastUtils;
@@ -23,7 +24,7 @@ import butterknife.Unbinder;
  *    time   : 2018/10/18
  *    desc   : 项目中 Fragment 懒加载基类
  */
-public abstract class MyLazyFragment <V, T extends BasePresenter<V>>  extends UILazyFragment {
+public abstract class MyLazyFragment <V, T extends BasePresenter<V>>  extends UILazyFragment implements OnTitleBarListener {
 
     private Unbinder mButterKnife; // View注解
     protected T mPresenter;
@@ -104,4 +105,13 @@ public abstract class MyLazyFragment <V, T extends BasePresenter<V>>  extends UI
         intent.putExtra(SonicJavaScriptInterface.PARAM_CLICK_TIME, System.currentTimeMillis());
         startActivityForResult(intent, -1);
     }
+
+    @Override
+    public void onRightClick(View v){}
+
+    @Override
+    public void onLeftClick(View v) {}
+
+    @Override
+    public void onTitleClick(View v) {}
 }

@@ -150,7 +150,7 @@ public final class LoopView extends View {
 
         if (mData == null) return;
 
-        // the length of single item is mItemHeight
+        // the length of single item_home_strategy is mItemHeight
         int mChangingItem = (int) (mTotalScrollY / (mItemHeight));
         mCurrentIndex = mInitPosition + mChangingItem % mData.size();
         if (!mCanLoop) { // can loop
@@ -170,7 +170,7 @@ public final class LoopView extends View {
         }
 
         int count = 0;
-        // reconfirm each item's value from dataList according to currentIndex,
+        // reconfirm each item_home_strategy's value from dataList according to currentIndex,
         while (count < mDrawItemsCount) {
             int templateItem = mCurrentIndex - (mDrawItemsCount / 2 - count);
             if (mCanLoop) {
@@ -241,7 +241,7 @@ public final class LoopView extends View {
                     // draw center complete text
                     canvas.clipRect(0, 0, getMeasuredWidth(), (int) (itemHeight));
                     canvas.drawText(mItemTempArray[count], mHorizontalPadding, mMaxTextHeight, mCenterTextPaint);
-                    // center one indicate selected item
+                    // center one indicate selected item_home_strategy
                     mSelectedItem = mData.indexOf(mItemTempArray[count]);
                 }
                 canvas.restore();
@@ -461,10 +461,10 @@ public final class LoopView extends View {
             if (realTotalOffset == Integer.MAX_VALUE) {
 
                 if ((float) offset > mItemHeight / 2.0F) {
-                    // move to next item
+                    // move to next item_home_strategy
                     realTotalOffset = (int) (mItemHeight - (float) offset);
                 } else {
-                    // move to pre item
+                    // move to pre item_home_strategy
                     realTotalOffset = -offset;
                 }
             }

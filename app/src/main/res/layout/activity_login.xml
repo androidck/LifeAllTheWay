@@ -65,6 +65,7 @@
             android:layout_marginLeft="@dimen/space_50"
             android:layout_marginRight="@dimen/space_50"
             android:layout_marginTop="@dimen/space_100"
+            android:gravity="center"
             android:text="@string/title_login"
             android:textColor="@android:color/white"
             />

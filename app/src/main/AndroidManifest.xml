@@ -79,6 +79,19 @@
             android:screenOrientation="portrait"
             android:label="@string/title_register"
             />
+        <activity android:name=".modules.ui.main.mine.MoreSetupActivity"
+            android:label="@string/more_setup"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".modules.ui.main.mine.ShoppingMallApplyActivity"
+            android:label="@string/shopping_apply"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".modules.ui.main.mine.OnLineCardActivity"
+            android:label="@string/online_card"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".modules.ui.main.user.IdentifyOneActivity" />
     </application>
 
 </manifest>

@@ -72,7 +72,8 @@ public class ShoppingFragment extends MyLazyFragment {
         webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         webSettings.setLoadWithOverviewMode(true);
 
-        webView.loadUrl(HttpConstant.H5_MALL+"b28fc6714528434d83f06e8e56e978b0");
+        webView.loadUrl(String.format(HttpConstant.H5_MALL, "b28fc6714528434d83f06e8e56e978b0"));
+
 
         WebViewClient webViewClient = new WebViewClient() {
             @Override
