@@ -27,7 +27,7 @@ public class MarqueeView extends SurfaceView implements SurfaceHolder.Callback{
 
     private float mTextSize = 100; //字体大小
 
-    private int mTextColor = Color.RED; //字体的颜色
+    private int mtextColor = Color.RED; //字体的颜色
 
     private boolean mIsRepeat;//是否重复滚动
 
@@ -70,7 +70,7 @@ public class MarqueeView extends SurfaceView implements SurfaceHolder.Callback{
     private void init(AttributeSet attrs, int defStyleAttr) {
 
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.MarqueeView, defStyleAttr, 0);
-        mTextColor = a.getColor(R.styleable.MarqueeView_textcolor, Color.RED);
+        mtextColor = a.getColor(R.styleable.MarqueeView_textColor, Color.RED);
         mTextSize = a.getDimension(R.styleable.MarqueeView_textSize, 48);
         mIsRepeat=a.getBoolean(R.styleable.MarqueeView_isRepeat,false);
         mStartPoint=a.getInt(R.styleable.MarqueeView_startPoint,0);
@@ -97,7 +97,7 @@ public class MarqueeView extends SurfaceView implements SurfaceHolder.Callback{
     protected void measurementsText(String msg) {
         margueeString=msg;
         mTextPaint.setTextSize(mTextSize);
-        mTextPaint.setColor(mTextColor);
+        mTextPaint.setColor(mtextColor);
         mTextPaint.setStrokeWidth(0.5f);
         mTextPaint.setFakeBoldText(false);
         // 设定阴影(柔边, X 轴位移, Y 轴位移, 阴影颜色)

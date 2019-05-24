@@ -30,7 +30,8 @@
     <string name="txt_next">下一步</string>
     <string name="success_register">完成注册</string>
     <string name="phone_tip">请输入正确的手机号</string>
-    <string name="pwd_tip">请输入6-8位密码</string>
+    <string name="pwd_tip">请输入6-12位密码</string>
+    <string name="code_tip">请输入验证码</string>
     <string name="pwd_login">密码登录</string>
     <string name="code_login">验证码登录</string>
     <string name="group_chat_fragment">群聊</string>

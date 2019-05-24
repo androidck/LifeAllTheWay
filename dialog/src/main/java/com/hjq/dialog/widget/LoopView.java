@@ -51,9 +51,9 @@ public final class LoopView extends View {
     private int mMaxTextWidth;
     private int mMaxTextHeight;
 
-    private int mTopBottomTextColor;
+    private int mTopBottomtextColor;
 
-    private int mCenterTextColor;
+    private int mCentertextColor;
     private int mCenterLineColor;
 
     private float mLineSpacingMultiplier;
@@ -88,8 +88,8 @@ public final class LoopView extends View {
 
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.LoopView);
         if (array != null) {
-            mTopBottomTextColor = array.getColor(R.styleable.LoopView_topBottomTextColor, 0xffafafaf);
-            mCenterTextColor = array.getColor(R.styleable.LoopView_centerTextColor, 0xff313131);
+            mTopBottomtextColor = array.getColor(R.styleable.LoopView_topBottomTextColor, 0xffafafaf);
+            mCentertextColor = array.getColor(R.styleable.LoopView_centerTextColor, 0xff313131);
             mCenterLineColor = array.getColor(R.styleable.LoopView_lineColor, 0xffc5c5c5);
             mCanLoop = array.getBoolean(R.styleable.LoopView_canLoop, true);
             mInitPosition = array.getInt(R.styleable.LoopView_initPosition, -1);
@@ -314,12 +314,12 @@ public final class LoopView extends View {
         if (mData == null) {
             throw new IllegalArgumentException("data list must not be null!");
         }
-        mTopBottomTextPaint.setColor(mTopBottomTextColor);
+        mTopBottomTextPaint.setColor(mTopBottomtextColor);
         mTopBottomTextPaint.setAntiAlias(true);
         mTopBottomTextPaint.setTypeface(Typeface.MONOSPACE);
         mTopBottomTextPaint.setTextSize(mTextSize);
 
-        mCenterTextPaint.setColor(mCenterTextColor);
+        mCenterTextPaint.setColor(mCentertextColor);
         mCenterTextPaint.setAntiAlias(true);
         mCenterTextPaint.setTextScaleX(1.05F);
         mCenterTextPaint.setTypeface(Typeface.MONOSPACE);

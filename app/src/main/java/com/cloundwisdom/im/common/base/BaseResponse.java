@@ -10,9 +10,25 @@ public class BaseResponse<T> {
 
     private String msg;
 
-    private T newslist;
+    private T data;
 
+    private T list;
 
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    public T getList() {
+        return list;
+    }
+
+    public void setList(T list) {
+        this.list = list;
+    }
 
     public int getCode() {
         return code;
@@ -28,14 +44,6 @@ public class BaseResponse<T> {
 
     public void setMsg(String msg) {
         this.msg = msg;
-    }
-
-    public T getNewslist() {
-        return newslist;
-    }
-
-    public void setNewslist(T newslist) {
-        this.newslist = newslist;
     }
 
 }

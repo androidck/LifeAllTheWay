@@ -4,24 +4,48 @@ import retrofit2.http.PUT;
 
 public class HttpConstant{
 
-    public static final String BASE_HOST="";
+    public static final String BASE_HOST="http://admin.minmai1688.com/";
 
-    public static final String BASE_PJ="";
+    public static final String BASE_PJ="app/";
 
-    public static final String BASE_URL = "";
+    public static final String BASE_URL = BASE_HOST+BASE_PJ;
 
     /* 请求基础地址：外网正式服务器地址：商城*/
     private static final String BASE_SHOP_URL = "http://shop.minmai1688.com/";
 
     private static final String MALL = "shoppingmall/";
 
+    /**
+     * 七牛云域名
+     */
+    public static final String QINIU_URL = "http://img.minmai1688.com/";
+
+    public static final String QINIU_AK = "XN8gu4Dzj4k120ld30f4SDmGHdEoDti0g1f3Yoez";
+
+    public static final String QIUNIU_SK = "DiDnfUGK52u3tWlnYKhlJRtm3vt_kp7HflGloWvu";
 
 
-    /*********************************************h5链接*******************************************************/
+    /********************************************* 接口地址 *******************************************************/
+
+    /**
+     * 密码登录接口
+     */
+    public static final String URL_USER_LOGIN ="user/userLogin";
+
+
+    /********************************************* h5链接 *******************************************************/
     /**
      * 商城H5链接
      */
     public static final String H5_MALL = BASE_SHOP_URL + MALL + "shoppingmall/homePage.html?openId=%s";
+    /**
+     * 验证码登录接口
+     */
+    public static final String URL_PHONE_USER_LOGIN = BASE_URL + BASE_PJ + "user/phoneUserLogin";
+    /**
+     * 退出登录接口
+     */
+    public static final String URL_USER_SIGN_OUT = BASE_URL + BASE_PJ + "user/userSignOut";
 
     /**
      * 商城订单信息

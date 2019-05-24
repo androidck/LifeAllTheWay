@@ -1,9 +1,13 @@
 package com.cloundwisdom.im.modules.ui.main.user;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,6 +20,8 @@ import com.cloundwisdom.im.common.base.MyActivity;
 import com.cloundwisdom.im.common.constant.ActivityConstant;
 import com.cloundwisdom.im.common.util.RegexValidateUtil;
 import com.cloundwisdom.im.common.watcher.PhoneWatcher;
+import com.cloundwisdom.im.modules.network.presenter.LoginPresenter;
+import com.cloundwisdom.im.modules.network.view.ILoginView;
 import com.hjq.bar.TitleBar;
 import com.hjq.widget.ClearEditText;
 
@@ -24,7 +30,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 @Route(path = ActivityConstant.LOGIN)
-public class LoginActivity extends MyActivity {
+public class LoginActivity extends MyActivity<ILoginView, LoginPresenter> implements ILoginView {
     @BindView(R.id.view_title)
     TitleBar viewTitle;
     @BindView(R.id.ed_phone)
@@ -43,7 +49,7 @@ public class LoginActivity extends MyActivity {
     private String phone;
     private String pwd;
 
-    public int loginType=0;//默认登录类型 密码登录
+    public int loginType=1;//默认登录类型 密码登录
 
     @Override
     protected int getLayoutId() {
@@ -63,35 +69,52 @@ public class LoginActivity extends MyActivity {
         edPhone.addTextChangedListener(new PhoneWatcher(edPhone));
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void requestVerification() {
         super.requestVerification();
         phone=edPhone.getText().toString().trim().replace(" ","");
         pwd=edPwd.getText().toString().trim();
-        if (TextUtils.isEmpty(phone)|| !RegexValidateUtil.isPhone(phone)){
-            toast(R.string.phone_tip);
-        }else if (TextUtils.isEmpty(pwd)){
-            toast(R.string.pwd_tip);
-        }else {
-            //这里调用网络请求的方法
+        //判断登录类型
+        if (loginType==1){
+            if (TextUtils.isEmpty(phone)|| !RegexValidateUtil.isPhone(phone)){
+                toast(R.string.phone_tip);
+            }else if (TextUtils.isEmpty(pwd)){
+                toast(R.string.pwd_tip);
+            }else {
+                mPresenter.userPwdLogin(phone,pwd);
+            }
+        }else if (loginType==2){
+            if (TextUtils.isEmpty(phone)|| !RegexValidateUtil.isPhone(phone)){
+                toast(R.string.phone_tip);
+            }else if (TextUtils.isEmpty(pwd)){
+                toast(R.string.code_tip);
+            }else {
+                //这里调用网络请求的方法
+                mPresenter.userCodeLogin();
+            }
         }
     }
 
     public void updateLoginType(){
-        if (loginType==0){
+        if (loginType==1){
             //切换为验证码登录
             //切换为密码登录
-            edPwd.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            edPwd.setFilters(new InputFilter[]{new InputFilter.LengthFilter(8)});//限制输入6位
-            tvLoginType.setText(R.string.pwd_login);
-            tvForgotPwd.setText(R.string.forgot_pwd);
-            edPwd.setHint(R.string.hint_pwd);
-        }else if (loginType==1){
-            edPwd.setInputType(InputType.TYPE_NUMBER_FLAG_SIGNED);
-            edPwd.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});//限制输入6位
+            loginType=2;
+            edPwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            edPwd.setSelection(edPwd.getText().toString().length());
+            edPwd.setInputType(InputType.TYPE_CLASS_NUMBER);
             tvLoginType.setText(R.string.code_login);
             tvForgotPwd.setText(R.string.send_msg);
             edPwd.setHint(R.string.hint_code);
+        }else if (loginType==2){
+            loginType=1;
+            edPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            edPwd.setSelection(edPwd.getText().toString().length());
+            edPwd.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            tvLoginType.setText(R.string.pwd_login);
+            tvForgotPwd.setText(R.string.forgot_pwd);
+            edPwd.setHint(R.string.hint_pwd);
 
         }
     }
@@ -108,13 +131,11 @@ public class LoginActivity extends MyActivity {
     }
 
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected LoginPresenter createPresenter() {
+        return new LoginPresenter(this);
     }
 
-
-
-
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @OnClick({R.id.tv_forgot_pwd, R.id.btn_login, R.id.tv_register, R.id.tv_login_type})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -127,14 +148,10 @@ public class LoginActivity extends MyActivity {
                 ARouter.getInstance().build(ActivityConstant.REGISTER_ONE).navigation();
                 break;
             case R.id.tv_login_type:
-                if (loginType==1){
-                    loginType=0;
-                    updateLoginType();
-                }else if (loginType==0){
-                    loginType=1;
-                    updateLoginType();
-                }
+                updateLoginType();
                 break;
         }
     }
+
+
 }

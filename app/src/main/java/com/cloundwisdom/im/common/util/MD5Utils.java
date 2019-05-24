@@ -1,82 +1,118 @@
 package com.cloundwisdom.im.common.util;
 
+import android.text.TextUtils;
+
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * @创建者 CSDN_LQR
- * @描述 MD5加密工具
+ * Created by gb on 2018/1/24.
  */
 public class MD5Utils {
+    /**
+     * 十六位
+     */
+    public static final String NUMBER_DIGITS_16 = "16";
+    /**
+     * 三十二位
+     */
+    public static final String NUMBER_DIGITS_32 = "32";
 
     /**
-     * md5加密(16位 小写)
-     *
-     * @param password
-     * @return
+     * 大写
      */
-    public static String decode16(String password) {
-        return decode32(password).substring(8, 24);
+    public static final String CAPITALIZATION_BIG = "Big";
+    /**
+     * 小写
+     */
+    public static final String CAPITALIZATION_SMALL = "small";
+
+    public static void main(String[] sar) {
+        System.out.println("小写16：" + stringToMD5("123456789"));
     }
 
     /**
-     * md5加密(32位 小写)
+     * 将字符串转成MD5值(默认是16位全部小写)
      *
-     * @param password
+     * @param string
      * @return
      */
-    public static String decode32(String password) {
+    public static String stringToMD5(String string) {
+        return stringToMD5(string, NUMBER_DIGITS_16, CAPITALIZATION_SMALL);
+    }
 
-        try {
-            // 得到一个信息摘要器
-            MessageDigest digest = MessageDigest.getInstance("md5");
-            byte[] result = digest.digest(password.getBytes());
-            StringBuffer buffer = new StringBuffer();
-            // 把每一个byte 做一个与运算 0xff;
-            for (byte b : result) {
-                // 与运算
-                int number = b & 0xff;// 加盐
-                String str = Integer.toHexString(number);
-                // System.out.println(str);
-                if (str.length() == 1) {
-                    buffer.append("0");
-                }
-                buffer.append(str);
+    /**
+     * 将字符串转成MD5值(默认是16位)
+     *
+     * @param string 自定义大小写
+     * @return
+     */
+    public static String stringToMD5(String string, String capitalization) {
+        return stringToMD5(string, NUMBER_DIGITS_16, capitalization);
+    }
+
+    /**
+     * 将字符串转成MD5值(全部小写)
+     *
+     * @param string
+     * @return
+     */
+    public static String stringToMD532(String string) {
+        return stringToMD5(string, NUMBER_DIGITS_32, CAPITALIZATION_SMALL);
+    }
+
+    /**
+     * 将字符串转成MD5值(全部小写)
+     *
+     * @param string
+     * @return
+     */
+    public static String stringToMD532(String string, String capitalization) {
+        return stringToMD5(string, NUMBER_DIGITS_32, capitalization);
+    }
+
+    /**
+     * 将字符串转成MD5值
+     *
+     * @param string
+     * @return
+     */
+    private static String stringToMD5(String string, String numberDigits, String capitalization) {
+        String md5Data = null;
+        if (!TextUtils.isEmpty(getMd5Value(string))) {
+            if (NUMBER_DIGITS_16.equals(numberDigits)) {
+                md5Data = getMd5Value(string).substring(8, 24);
+            } else if (NUMBER_DIGITS_32.equals(numberDigits)) {
+                md5Data = getMd5Value(string);
             }
+            /*大写*/
+            if (CAPITALIZATION_BIG.equals(capitalization)) {
+                md5Data = md5Data.toUpperCase();
+            }
+        }
+        return md5Data;
+    }
 
-            // 标准的md5加密后的结果
-            return buffer.toString();
+
+    private static String getMd5Value(String string) {
+        byte[] hash;
+        try {
+            hash = MessageDigest.getInstance("MD5").digest(string.getBytes("UTF-8"));
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            return "";
+            return null;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return null;
         }
-
+        StringBuilder hex = new StringBuilder(hash.length * 2);
+        for (byte b : hash) {
+            if ((b & 0xFF) < 0x10) {
+                hex.append("0");
+            }
+            hex.append(Integer.toHexString(b & 0xFF));
+        }
+        return hex.toString();
     }
-    /**
-     * md5加密(32位 小写)
-     *
-     * @param password
-     * @return
-     */
-//    public final static String getMessageDigest(String password) {
-//        byte[] buffer = password.getBytes();
-//        char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-//                'a', 'b', 'c', 'd', 'e', 'f'};
-//        try {
-//            MessageDigest mdTemp = MessageDigest.getInstance("MD5");
-//            mdTemp.update(buffer);
-//            byte[] md = mdTemp.digest();
-//            int j = md.length;
-//            char str[] = new char[j * 2];
-//            int k = 0;
-//            for (int i = 0; i < j; i++) {
-//                byte byte0 = md[i];
-//                str[k++] = hexDigits[byte0 >>> 4 & 0xf];
-//                str[k++] = hexDigits[byte0 & 0xf];
-//            }
-//            return new String(str);
-//        } catch (Exception e) {
-//            return null;
-//        }
-//    }
 }

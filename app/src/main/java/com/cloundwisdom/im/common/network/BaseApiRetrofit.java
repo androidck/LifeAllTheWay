@@ -63,35 +63,31 @@ public class BaseApiRetrofit {
 
         //OkHttpClient
         mClient = new OkHttpClient.Builder()
-                .addInterceptor(REWRITE_HEADER_CONTROL_INTERCEPTOR)
-                .addInterceptor(REWRITE_CACHE_CONTROL_INTERCEPTOR)
-                .addInterceptor(new LoggingInterceptor())
-//                .addInterceptor(loggingInterceptor)//设置 Debug Log 模式
                 .cache(cache)
                 .cookieJar(cookieJar)
                 .build();
     }
 
-    //header配置
-    Interceptor REWRITE_HEADER_CONTROL_INTERCEPTOR = chain -> {
-        Request request=null;
-        if (userEntryDao!=null){
-            request = chain.request()
-                    .newBuilder()
-                    .addHeader(EnumHttpHeaderParam.getHeaderParam(0), userEntryDao.loadAll().get(0).getUserId())//用户id
-                    .addHeader(EnumHttpHeaderParam.getHeaderParam(1), "application/json; charset=utf-8")//时间戳
-                    .addHeader(EnumHttpHeaderParam.getHeaderParam(2), "gzip, deflate")//服务名称
-                    .addHeader(EnumHttpHeaderParam.getHeaderParam(3), "keep-alive")//签名
-                    .addHeader(EnumHttpHeaderParam.getHeaderParam(4), "*/*")//极光生成的token
-                    .addHeader(EnumHttpHeaderParam.getHeaderParam(5), "add cookies here")//设备类型
-                    .addHeader(EnumHttpHeaderParam.getHeaderParam(6), "add cookies here")//设备编码
-                    .addHeader(EnumHttpHeaderParam.getHeaderParam(7), "add cookies here")//设备型号
-                    .addHeader(EnumHttpHeaderParam.getHeaderParam(8), KeyConstant.PROJECT_APP_ID)//项目id
-                    .build();
-        }
-
-        return chain.proceed(request);
-    };
+//    //header配置
+//    Interceptor REWRITE_HEADER_CONTROL_INTERCEPTOR = chain -> {
+//        Request request=null;
+//        if (userEntryDao!=null){
+//            request = chain.request()
+//                    .newBuilder()
+////                     .addHeader(EnumHttpHeaderParam.getHeaderParam(0), userEntryDao.loadAll().get(0).getUserId()==null?"":userEntryDao.loadAll().get(0).getUserId())//用户id*/
+//   //                 .addHeader("Content-type", "application/json; charset=utf-8")//时间戳
+////                    .addHeader(EnumHttpHeaderParam.getHeaderParam(2), "gzip, deflate")//服务名称
+////                    .addHeader(EnumHttpHeaderParam.getHeaderParam(3), "keep-alive")//签名
+////                    .addHeader(EnumHttpHeaderParam.getHeaderParam(4), "*/*")//极光生成的token
+////                    .addHeader(EnumHttpHeaderParam.getHeaderParam(5), "add cookies here")//设备类型
+////                    .addHeader(EnumHttpHeaderParam.getHeaderParam(6), "add cookies here")//设备编码
+////                    .addHeader(EnumHttpHeaderParam.getHeaderParam(7), "add cookies here")//设备型号
+//                   // .addHeader(EnumHttpHeaderParam.getHeaderParam(8), KeyConstant.PROJECT_APP_ID)//项目id
+//                    .build();
+//        }
+//
+//        return chain.proceed(request);
+//    };
 
     //cache配置
     Interceptor REWRITE_CACHE_CONTROL_INTERCEPTOR = chain -> {
@@ -126,7 +122,7 @@ public class BaseApiRetrofit {
         }
     };
 
-    class LoggingInterceptor implements Interceptor {
+    /*class LoggingInterceptor implements Interceptor {
         @Override
         public Response intercept(Chain chain) throws IOException {
             //这个chain里面包含了request和response，所以你要什么都可以从这里拿
@@ -147,6 +143,6 @@ public class BaseApiRetrofit {
                     response.headers()));
             return response;
         }
-    }
+    }*/
 
 }

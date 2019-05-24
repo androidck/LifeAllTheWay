@@ -2,13 +2,13 @@ package com.cloundwisdom.im.common.api;
 
 
 import com.cloundwisdom.im.common.base.BaseResponse;
-
-import java.util.List;
+import com.cloundwisdom.im.common.constant.HttpConstant;
+import com.cloundwisdom.im.modules.entry.response.UserInfoResponse;
 
 import io.reactivex.Observable;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.POST;
 
 /**
  * @创建者 CSDN_LQR
@@ -17,10 +17,13 @@ import retrofit2.http.Query;
 
 public interface MyApi {
 
-
-/*    //登录
-    @POST("user/login")
-    Observable<LoginResponse> login(@Body RequestBody body);*/
-
+    /**
+     * 用户登录
+     * @return
+     */
+    @POST(HttpConstant.URL_USER_LOGIN)
+    @FormUrlEncoded
+    Observable<BaseResponse<UserInfoResponse>> userPwdLogin(@Field("loginName") String phone,
+                                                            @Field("pwd") String pwd);
 
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <declare-styleable name="LoopView">
         <attr name="lineColor" format="color"/>
         <attr name="topBottomTextColor" format="color"/>
@@ -31,5 +30,4 @@
         <attr name="cpd_inStepPercent" format="float"/>
         <attr name="pv_progressMode"/>
     </declare-styleable>
-
 </resources>
