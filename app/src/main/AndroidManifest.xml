@@ -91,7 +91,18 @@
             android:label="@string/online_card"
             android:screenOrientation="portrait"
             />
-        <activity android:name=".modules.ui.main.user.IdentifyOneActivity" />
+        <activity android:name=".modules.ui.main.user.IdentifyOneActivity"
+            android:label="@string/activity_identify_one"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".modules.ui.main.user.IdentifyTwoActivity"
+            android:label="@string/activity_identify_two"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".modules.ui.main.user.IdentifyThreeActivity"
+            android:label="@string/activity_identify_three"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>

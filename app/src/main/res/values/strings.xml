@@ -2,7 +2,9 @@
     <string name="app_name">一路生活</string>
 
     <!-- activity 开始 -->
-
+    <string name="activity_identify_one">实名认证第一步</string>
+    <string name="activity_identify_two">实名认证第二步</string>
+    <string name="activity_identify_three">实名认证第三步</string>
     <!-- activity 结束 -->
 
     <!-- fragment 开始 -->
@@ -66,6 +68,7 @@
     <string name="pay">立即支付</string>
     <string name="shopping_apply">商城申请</string>
     <string name="online_card">在线办卡</string>
+    <string name="btn_commit">提交审核</string>
     <!--控件展示，与文字提示 结束-->
 
 </resources>

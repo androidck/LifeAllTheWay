@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.lqr.emoji:library:1.0.2@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/28b95505416e1a3b6631a6007aa3a81d/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/28b95505416e1a3b6631a6007aa3a81d/jars/libs/universal-image-loader-1.9.5.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/28b95505416e1a3b6631a6007aa3a81d/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/923bf66f48cca9bf88b47ee65530e8cc/jars/libs/universal-image-loader-1.9.5.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/923bf66f48cca9bf88b47ee65530e8cc/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/923bf66f48cca9bf88b47ee65530e8cc/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
