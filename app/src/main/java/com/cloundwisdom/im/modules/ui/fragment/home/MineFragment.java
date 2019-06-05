@@ -8,11 +8,13 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cloundwisdom.im.R;
-import com.cloundwisdom.im.common.base.BasePresenter;
 import com.cloundwisdom.im.common.base.MyLazyFragment;
 import com.cloundwisdom.im.common.constant.ActivityConstant;
 import com.cloundwisdom.im.common.constant.HttpConstant;
 import com.cloundwisdom.im.common.constant.KeyConstant;
+import com.cloundwisdom.im.modules.network.presenter.MinePresenter;
+import com.cloundwisdom.im.modules.network.view.IMineView;
+import com.cloundwisdom.im.modules.ui.main.MainActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.zhy.autolayout.AutoLinearLayout;
 
@@ -25,7 +27,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * 个人中心
  */
-public class MineFragment extends MyLazyFragment {
+public class MineFragment extends MyLazyFragment<IMineView, MinePresenter> implements IMineView {
     @BindView(R.id.img_head)
     CircleImageView imgHead;
     @BindView(R.id.nick_name)
@@ -76,12 +78,10 @@ public class MineFragment extends MyLazyFragment {
     TextView tvSetting;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
+    @BindView(R.id.tv_service_phone)
+    TextView tvServicePhone;
 
 
-    @Override
-    protected BasePresenter createPresenter() {
-        return null;
-    }
 
     protected int getLayoutId() {
         return R.layout.fragment_mine;
@@ -105,11 +105,11 @@ public class MineFragment extends MyLazyFragment {
 
     @Override
     protected void initData() {
-
+        mPresenter.getUserCenterInfo();
     }
 
 
-    @OnClick({R.id.img_head, R.id.edit_nick_name,  R.id.ly_collection, R.id.ly_history, R.id.ly_evaluate,R.id.tv_all_order, R.id.tv_shop_cart, R.id.tv_stay_pay, R.id.tv_stay_goods, R.id.tv_stay_collect, R.id.tv_stay_retreat, R.id.ly_apply, R.id.tv_address, R.id.tv_service, R.id.ly_service_phone, R.id.tv_shopping_apply, R.id.tv_setting})
+    @OnClick({R.id.img_head, R.id.edit_nick_name, R.id.ly_collection, R.id.ly_history, R.id.ly_evaluate, R.id.tv_all_order, R.id.tv_shop_cart, R.id.tv_stay_pay, R.id.tv_stay_goods, R.id.tv_stay_collect, R.id.tv_stay_retreat, R.id.ly_apply, R.id.tv_address, R.id.tv_service, R.id.ly_service_phone, R.id.tv_shopping_apply, R.id.tv_setting})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_head:
@@ -117,37 +117,37 @@ public class MineFragment extends MyLazyFragment {
             case R.id.edit_nick_name:
                 break;
             case R.id.ly_collection:
-                startBrowserActivity(mContext,1, String.format(HttpConstant.H5_MALL_PRODUCT_COLLECTION, KeyConstant.USER_ID));
+                startBrowserActivity(mContext, 1, String.format(HttpConstant.H5_MALL_PRODUCT_COLLECTION, KeyConstant.USER_ID));
                 break;
             case R.id.ly_history:
-                startBrowserActivity(mContext,1, String.format(HttpConstant.H5_MALL_BROWSING_HISTORY, KeyConstant.USER_ID));
+                startBrowserActivity(mContext, 1, String.format(HttpConstant.H5_MALL_BROWSING_HISTORY, KeyConstant.USER_ID));
                 break;
             case R.id.ly_evaluate:
-                startBrowserActivity(mContext,1, String.format(HttpConstant.H5_MALL_ORDER_INFORMATION, KeyConstant.USER_ID, "toEvaluate"));
+                startBrowserActivity(mContext, 1, String.format(HttpConstant.H5_MALL_ORDER_INFORMATION, KeyConstant.USER_ID, "toEvaluate"));
                 break;
             case R.id.tv_all_order:
-                startBrowserActivity(mContext,1, String.format(HttpConstant.H5_MALL_ORDER_INFORMATION, KeyConstant.USER_ID, "all"));
+                startBrowserActivity(mContext, 1, String.format(HttpConstant.H5_MALL_ORDER_INFORMATION, KeyConstant.USER_ID, "all"));
                 break;
             case R.id.tv_shop_cart:
-                startBrowserActivity(mContext,1, String.format(HttpConstant.H5_MALL_SHOPPING_CART, KeyConstant.USER_ID));
+                startBrowserActivity(mContext, 1, String.format(HttpConstant.H5_MALL_SHOPPING_CART, KeyConstant.USER_ID));
                 break;
             case R.id.tv_stay_pay:
-                startBrowserActivity(mContext,1, String.format(HttpConstant.H5_MALL_ORDER_INFORMATION, KeyConstant.USER_ID, "-2"));
+                startBrowserActivity(mContext, 1, String.format(HttpConstant.H5_MALL_ORDER_INFORMATION, KeyConstant.USER_ID, "-2"));
                 break;
             case R.id.tv_stay_goods:
-                startBrowserActivity(mContext,1, String.format(HttpConstant.H5_MALL_ORDER_INFORMATION, KeyConstant.USER_ID, "0"));
+                startBrowserActivity(mContext, 1, String.format(HttpConstant.H5_MALL_ORDER_INFORMATION, KeyConstant.USER_ID, "0"));
                 break;
             case R.id.tv_stay_collect:
-                startBrowserActivity(mContext,1, String.format(HttpConstant.H5_MALL_ORDER_INFORMATION, KeyConstant.USER_ID, "-1"));
+                startBrowserActivity(mContext, 1, String.format(HttpConstant.H5_MALL_ORDER_INFORMATION, KeyConstant.USER_ID, "-1"));
                 break;
             case R.id.tv_stay_retreat:
-                startBrowserActivity(mContext,1, String.format(HttpConstant.H5_MALL_REFUND_OR_AFTER_SALE, KeyConstant.USER_ID));
+                startBrowserActivity(mContext, 1, String.format(HttpConstant.H5_MALL_REFUND_OR_AFTER_SALE, KeyConstant.USER_ID));
                 break;
             case R.id.ly_apply:
                 ARouter.getInstance().build(ActivityConstant.ON_LINE_CARD).navigation();
                 break;
             case R.id.tv_address:
-                startBrowserActivity(mContext,1, String.format(HttpConstant.H5_MALL_HARVEST_ADDRESS, KeyConstant.USER_ID));
+                startBrowserActivity(mContext, 1, String.format(HttpConstant.H5_MALL_HARVEST_ADDRESS, KeyConstant.USER_ID));
                 break;
             case R.id.tv_service:
                 break;
@@ -161,4 +161,36 @@ public class MineFragment extends MyLazyFragment {
                 break;
         }
     }
+
+    @Override
+    protected MinePresenter createPresenter() {
+        return new MinePresenter((MainActivity) getContext());
+    }
+
+    @Override
+    public TextView getUserNo() {
+        return tvUserNo;
+    }
+
+    @Override
+    public CircleImageView getHeadImgUrl() {
+        return imgHead;
+    }
+
+    @Override
+    public TextView getNickName() {
+        return nickName;
+    }
+
+    @Override
+    public TextView getRealName() {
+        return tvRealName;
+    }
+
+    @Override
+    public TextView getServicePhone() {
+        return tvServicePhone;
+    }
+
+
 }

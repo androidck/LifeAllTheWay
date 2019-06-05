@@ -13,7 +13,7 @@ import java.util.concurrent.TimeoutException;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import okhttp3.OkHttpClient;
+
 
 /**
  * @author: Allen.
@@ -78,7 +78,6 @@ public abstract class BaseObserver<T> implements Observer<BaseResponse<T>> {
      * 返回成功
      *
      * @param t
-     * @throws Exception
      */
     protected abstract void onSuccess(BaseResponse<T> t) throws Exception;
 
@@ -87,7 +86,6 @@ public abstract class BaseObserver<T> implements Observer<BaseResponse<T>> {
      * 没有数据或请求失败
      *
      * @param t
-     * @throws Exception
      */
     protected abstract void onError(BaseResponse<T> t) throws Exception;
 
@@ -97,7 +95,6 @@ public abstract class BaseObserver<T> implements Observer<BaseResponse<T>> {
      *
      * @param e
      * @param isNetWorkError 是否是网络错误
-     * @throws Exception
      */
     protected abstract void onFailure(Throwable e, boolean isNetWorkError) throws Exception;
 

@@ -12,6 +12,9 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cloundwisdom.im.R;
+import com.cloundwisdom.im.common.application.MyApplication;
+import com.cloundwisdom.im.common.greendao.SignEntryDao;
+import com.cloundwisdom.im.common.greendao.UserEntryDao;
 import com.cloundwisdom.im.common.view.CustomDialog;
 import com.cloundwisdom.im.common.web.BrowserActivity;
 import com.hjq.bar.OnTitleBarListener;
@@ -36,12 +39,16 @@ public abstract class MyActivity<V, T extends BasePresenter<V>> extends UIActivi
     private CustomDialog mDialogWaiting;
     private MaterialDialog mMaterialDialog;
     public T mPresenter;
+    public SignEntryDao signEntryDao;
+    public UserEntryDao userEntryDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityStackManager.getInstance().onActivityCreated(this);
         ARouter.getInstance().inject(this);
+        signEntryDao= MyApplication.mInstance.getDaoSession().getSignEntryDao();
+        userEntryDao=MyApplication.mInstance.getDaoSession().getUserEntryDao();
     }
 
     private Unbinder mButterKnife;//View注解
@@ -232,6 +239,26 @@ public abstract class MyActivity<V, T extends BasePresenter<V>> extends UIActivi
 
     //用于创建Presenter和判断是否使用MVP模式(由子类实现)
     protected abstract T createPresenter();
+
+    /**
+     * 不同状态处理
+     * @param state
+     * @return
+     */
+    public boolean isRegisterState(int state){
+        if (state==1){
+            //实名认证第一步
+            return false;
+        }else if (state==2){
+            //实名认证第二步
+            return false;
+        }else if (state==3){
+            //实名认证第三步
+            return false;
+        }else {
+            return true;
+        }
+    }
 
     //跳转到浏览器
     public void startBrowserActivity(Context context, int mode, String url) {

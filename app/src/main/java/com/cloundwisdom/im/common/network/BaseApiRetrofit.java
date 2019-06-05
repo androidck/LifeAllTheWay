@@ -1,19 +1,23 @@
 package com.cloundwisdom.im.common.network;
 
 
-
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 
 import com.cloundwisdom.im.common.application.MyApplication;
 import com.cloundwisdom.im.common.constant.KeyConstant;
-import com.cloundwisdom.im.common.greendao.UserEntryDao;
 import com.cloundwisdom.im.common.network.cookie.ClearableCookieJar;
 import com.cloundwisdom.im.common.network.cookie.PersistentCookieJar;
 import com.cloundwisdom.im.common.network.cookie.catche.SetCookieCache;
-import com.cloundwisdom.im.common.util.LogUtils;
 import com.cloundwisdom.im.common.network.persistence.SharedPrefsCookiePersistor;
+import com.cloundwisdom.im.common.util.LogUtils;
+import com.cloundwisdom.im.common.util.SignUtils;
+import com.cloundwisdom.im.common.util.SystemUtil;
+import com.cloundwisdom.im.modules.entry.greendao.entry.SignEntry;
+import com.cloundwisdom.im.modules.entry.greendao.entry.UserEntry;
+import com.cloundwisdom.im.modules.entry.greendao.utils.UserInfoUtils;
 import com.cloundwisdom.im.modules.token.EnumHttpHeaderParam;
+import com.cloundwisdom.im.modules.token.EnumService;
 import com.hjq.base.util.NetUtils;
 
 import java.io.File;
@@ -38,10 +42,8 @@ import okhttp3.ResponseBody;
 public class BaseApiRetrofit {
 
     private final OkHttpClient mClient;
-    private UserEntryDao userEntryDao;
 
     public OkHttpClient getClient() {
-        userEntryDao=MyApplication.mInstance.getDaoSession().getUserEntryDao();
         return mClient;
     }
 
@@ -63,31 +65,36 @@ public class BaseApiRetrofit {
 
         //OkHttpClient
         mClient = new OkHttpClient.Builder()
+               .addInterceptor(REWRITE_HEADER_CONTROL_INTERCEPTOR)
+            //    .addInterceptor(REWRITE_CACHE_CONTROL_INTERCEPTOR)
+                .addInterceptor(new LoggingInterceptor())
+//                .addInterceptor(loggingInterceptor)//设置 Debug Log 模式
                 .cache(cache)
                 .cookieJar(cookieJar)
                 .build();
     }
 
-//    //header配置
-//    Interceptor REWRITE_HEADER_CONTROL_INTERCEPTOR = chain -> {
-//        Request request=null;
-//        if (userEntryDao!=null){
-//            request = chain.request()
-//                    .newBuilder()
-////                     .addHeader(EnumHttpHeaderParam.getHeaderParam(0), userEntryDao.loadAll().get(0).getUserId()==null?"":userEntryDao.loadAll().get(0).getUserId())//用户id*/
-//   //                 .addHeader("Content-type", "application/json; charset=utf-8")//时间戳
-////                    .addHeader(EnumHttpHeaderParam.getHeaderParam(2), "gzip, deflate")//服务名称
-////                    .addHeader(EnumHttpHeaderParam.getHeaderParam(3), "keep-alive")//签名
-////                    .addHeader(EnumHttpHeaderParam.getHeaderParam(4), "*/*")//极光生成的token
-////                    .addHeader(EnumHttpHeaderParam.getHeaderParam(5), "add cookies here")//设备类型
-////                    .addHeader(EnumHttpHeaderParam.getHeaderParam(6), "add cookies here")//设备编码
-////                    .addHeader(EnumHttpHeaderParam.getHeaderParam(7), "add cookies here")//设备型号
-//                   // .addHeader(EnumHttpHeaderParam.getHeaderParam(8), KeyConstant.PROJECT_APP_ID)//项目id
-//                    .build();
-//        }
-//
-//        return chain.proceed(request);
-//    };
+    //header配置
+    Interceptor REWRITE_HEADER_CONTROL_INTERCEPTOR = chain -> {
+        SignEntry signEntry= SignUtils.getInstance().getSign();
+        String userId= UserInfoUtils.getInstance().getUserId();
+        long timeStamp=signEntry.getTimestamp();
+        String sign=signEntry.getSign();
+
+        Request request = chain.request()
+                .newBuilder()
+                .addHeader(EnumHttpHeaderParam.getHeaderParam(0), userId)//用户id
+                .addHeader(EnumHttpHeaderParam.getHeaderParam(1), String.valueOf(timeStamp)==null?"": String.valueOf(timeStamp))//时间戳
+                .addHeader(EnumHttpHeaderParam.getHeaderParam(2), EnumService.getEnumServiceByServiceName(1))//服务名称
+                .addHeader(EnumHttpHeaderParam.getHeaderParam(3), sign==null?"":sign)//签名
+                .addHeader(EnumHttpHeaderParam.getHeaderParam(4), "140fe1da9e877f458fc")//推送token
+                .addHeader(EnumHttpHeaderParam.getHeaderParam(5), "1")//设备类型
+                .addHeader(EnumHttpHeaderParam.getHeaderParam(6), "99001151510904")//设备编码
+                .addHeader(EnumHttpHeaderParam.getHeaderParam(7), SystemUtil.getInstance().getModel())//设备型号
+                .addHeader(EnumHttpHeaderParam.getHeaderParam(8), KeyConstant.PROJECT_APP_ID)
+                .build();
+        return chain.proceed(request);
+    };
 
     //cache配置
     Interceptor REWRITE_CACHE_CONTROL_INTERCEPTOR = chain -> {
@@ -122,7 +129,7 @@ public class BaseApiRetrofit {
         }
     };
 
-    /*class LoggingInterceptor implements Interceptor {
+    class LoggingInterceptor implements Interceptor {
         @Override
         public Response intercept(Chain chain) throws IOException {
             //这个chain里面包含了request和response，所以你要什么都可以从这里拿
@@ -143,6 +150,6 @@ public class BaseApiRetrofit {
                     response.headers()));
             return response;
         }
-    }*/
+    }
 
 }

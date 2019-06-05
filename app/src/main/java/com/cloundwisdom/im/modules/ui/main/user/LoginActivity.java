@@ -18,8 +18,10 @@ import com.cloundwisdom.im.R;
 import com.cloundwisdom.im.common.base.BasePresenter;
 import com.cloundwisdom.im.common.base.MyActivity;
 import com.cloundwisdom.im.common.constant.ActivityConstant;
+import com.cloundwisdom.im.common.util.MD5Utils;
 import com.cloundwisdom.im.common.util.RegexValidateUtil;
 import com.cloundwisdom.im.common.watcher.PhoneWatcher;
+import com.cloundwisdom.im.modules.entry.request.LoginReq;
 import com.cloundwisdom.im.modules.network.presenter.LoginPresenter;
 import com.cloundwisdom.im.modules.network.view.ILoginView;
 import com.hjq.bar.TitleBar;
@@ -82,7 +84,10 @@ public class LoginActivity extends MyActivity<ILoginView, LoginPresenter> implem
             }else if (TextUtils.isEmpty(pwd)){
                 toast(R.string.pwd_tip);
             }else {
-                mPresenter.userPwdLogin(phone,pwd);
+                LoginReq loginReq=new LoginReq();
+                loginReq.setLoginName(phone);
+                loginReq.setPwd(MD5Utils.stringToMD5(pwd));
+                mPresenter.userPwdLogin(loginReq);
             }
         }else if (loginType==2){
             if (TextUtils.isEmpty(phone)|| !RegexValidateUtil.isPhone(phone)){
@@ -91,7 +96,7 @@ public class LoginActivity extends MyActivity<ILoginView, LoginPresenter> implem
                 toast(R.string.code_tip);
             }else {
                 //这里调用网络请求的方法
-                mPresenter.userCodeLogin();
+
             }
         }
     }

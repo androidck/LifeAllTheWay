@@ -6,9 +6,6 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 public interface IMainView {
 
-    SmartRefreshLayout getRefreshLayout();
-
-    RecyclerView getRecyclerView();
 
 
 }

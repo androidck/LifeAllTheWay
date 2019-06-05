@@ -1,6 +1,7 @@
 package com.cloundwisdom.im.common.base;
 
 import com.hjq.base.view.BaseActivity;
+import com.hjq.toast.ToastUtils;
 
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
@@ -45,7 +46,7 @@ public class BasePresenter<V> {
      * @param msg
      */
     public void toast(String msg){
-
+        ToastUtils.show(msg);
     }
 
 }

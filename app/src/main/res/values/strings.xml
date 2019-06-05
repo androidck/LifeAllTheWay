@@ -71,5 +71,7 @@
     <string name="online_card">在线办卡</string>
     <string name="btn_commit">提交审核</string>
     <!--控件展示，与文字提示 结束-->
+    <!-- tip -->
+    <string name="net_work_error">网络异常，请检查网络</string>
 
 </resources>

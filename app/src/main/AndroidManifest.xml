@@ -65,6 +65,8 @@
             android:value="1280">
         </meta-data>
 
+        <activity android:name=".modules.ui.main.MainActivity"/>
+
         <activity android:name=".common.web.BrowserActivity" />
         <activity android:name=".modules.ui.main.user.RegisterOneActivity"
             android:screenOrientation="portrait"

@@ -1,4 +1,4 @@
-package com.cloundwisdom.im.modules.entry;
+package com.cloundwisdom.im.modules.entry.greendao.entry;
 
 import org.greenrobot.greendao.annotation.Id;
 

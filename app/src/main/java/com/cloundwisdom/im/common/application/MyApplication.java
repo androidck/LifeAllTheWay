@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.multidex.MultiDex;
 import android.widget.ImageView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -101,6 +102,13 @@ public class MyApplication extends UIApplication {
         // 注意：该数据库连接属于 DaoMaster，所以多个 Session 指的是相同的数据库连接。
         mDaoMaster = new DaoMaster(db);
         mDaoSession = mDaoMaster.newSession();
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        // 使用 Dex分包
+        MultiDex.install(this);
     }
 
     public DaoSession getDaoSession() {

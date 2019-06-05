@@ -4,15 +4,25 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.cloundwisdom.im.R;
 import com.cloundwisdom.im.common.api.ApiRetrofit;
 import com.cloundwisdom.im.common.base.BaseObserver;
 import com.cloundwisdom.im.common.base.BasePresenter;
 import com.cloundwisdom.im.common.base.BaseResponse;
 import com.cloundwisdom.im.common.base.MyActivity;
+import com.cloundwisdom.im.common.constant.ActivityConstant;
+import com.cloundwisdom.im.common.util.MD5Utils;
+import com.cloundwisdom.im.common.util.SignUtils;
+import com.cloundwisdom.im.modules.entry.greendao.utils.UserInfoUtils;
+import com.cloundwisdom.im.modules.entry.request.LoginReq;
+import com.cloundwisdom.im.modules.entry.response.UserInfo;
 import com.cloundwisdom.im.modules.entry.response.UserInfoResponse;
 import com.cloundwisdom.im.modules.network.view.ILoginView;
 
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * 登录逻辑处理
@@ -25,29 +35,36 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
 
     //密码登录
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void userPwdLogin(String username,String password){
+    public void userPwdLogin(LoginReq loginReq){
+        long timeStamp=SignUtils.getInstance().getTimeStamp();
+        //生成保存签名
+        SignUtils.getInstance().setSign(timeStamp,SignUtils.getInstance().sign(timeStamp,loginReq));
         prContext.showWaitingDialog("加载中");
-        ApiRetrofit
-                .getInstance()
-                .userPwdLogin(username,password)
+        ApiRetrofit.getInstance().login(loginReq)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<UserInfoResponse>(prContext) {
+                .subscribe(new BaseObserver<UserInfo>(prContext) {
                     @Override
-                    protected void onSuccess(BaseResponse<UserInfoResponse> t){
+                    protected void onSuccess(BaseResponse<UserInfo> t){
                         prContext.hideWaitingDialog();
-                        Log.d("loginRequest",t.toString());
+                        toast(t.getMsg());
+                        //登录成功保存用户信息
+                        UserInfoUtils.getInstance().setUserInfo(t.getData());
+                        //跳转到登录页面
+                        ARouter.getInstance().build(ActivityConstant.MAIN).navigation();
                     }
 
                     @Override
-                    protected void onError(BaseResponse<UserInfoResponse> t){
+                    protected void onError(BaseResponse<UserInfo> t){
                         prContext.hideWaitingDialog();
-                        Log.d("loginRequest",t.getMsg());
+                        toast(t.getMsg());
                     }
 
                     @Override
                     protected void onFailure(Throwable e, boolean isNetWorkError){
-                        prContext.hideWaitingDialog();
-                        e.printStackTrace();
+                        if (isNetWorkError){
+                            toast(String.valueOf(R.string.net_work_error));
+                        }
                     }
                 });
     }
