@@ -11,9 +11,14 @@ public class HttpConstant{
 
     private static final String MALL = "shoppingmall/";
 
-    public static String BASE_HOST="http://192.168.1.254:8080/";
+    // public static String BASE_HOST="http://192.168.1.254:8080/";
 
-    public static String PROJECT="qike/app/";
+    public static String BASE_HOST="http://middle.minmai1688.com/";
+
+
+
+    //   public static String PROJECT="qike/app/";
+    public static String PROJECT="app/";
 
     //访问URL
     public static String BASE_URL=BASE_HOST+PROJECT;
@@ -41,6 +46,31 @@ public class HttpConstant{
      * 用户个人中心
      */
     public static final String USER_PERSONAL_CENTER = "user/getUserPersonalCenter";
+
+    /**
+     * 首页banner 查询
+     */
+    public static final String BANNER_QUERY_BANNER = "banner/queryBanner";
+
+    /**
+     * 获取全部文章列表
+     */
+    public static final String QUERY_APP_INTRODUCE_CMS_LIST ="appIntroduceCms/queryAppIntroduceCmsList";
+
+    /**
+     * 查询轮播消息
+     */
+    public static final String TRADE_QUERY_APP_ROLL_MESSAGE = "trade/queryAppRollMessage";
+
+    /**
+     * 请求注册时验证码接口
+     */
+    public static final String URL_BIND_SEND_CODE = "code/bindSendCode";
+
+    /**
+     * 验证验证码接口
+     */
+    public static final String URL_AJAX_VALIDATE_CODE = "code/ajaxValidateCode";
 
 
     /********************************************* h5链接 *******************************************************/

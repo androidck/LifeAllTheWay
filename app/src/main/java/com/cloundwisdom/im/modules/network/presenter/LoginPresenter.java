@@ -17,7 +17,6 @@ import com.cloundwisdom.im.common.util.SignUtils;
 import com.cloundwisdom.im.modules.entry.greendao.utils.UserInfoUtils;
 import com.cloundwisdom.im.modules.entry.request.LoginReq;
 import com.cloundwisdom.im.modules.entry.response.UserInfo;
-import com.cloundwisdom.im.modules.entry.response.UserInfoResponse;
 import com.cloundwisdom.im.modules.network.view.ILoginView;
 
 

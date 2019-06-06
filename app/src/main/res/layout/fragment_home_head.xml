@@ -14,13 +14,17 @@
         android:layout_width="match_parent"
         android:layout_marginLeft="@dimen/space_30"
         android:layout_marginRight="@dimen/space_30"
-        android:text="恭喜尾号4578的用户刷卡获得分红0.16元"
         android:gravity="center_vertical"
         android:drawableLeft="@mipmap/notice"
         android:drawablePadding="@dimen/space_16"
         android:textColor="@color/textColors"
         android:textSize="@dimen/font_size_30px"
-        android:layout_height="@dimen/space_60" />
+        android:layout_height="@dimen/space_60"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:singleLine="true"
+        android:focusableInTouchMode="true"
+        />
     <include layout="@layout/divisions_line"/>
 
     <com.zhy.autolayout.AutoLinearLayout

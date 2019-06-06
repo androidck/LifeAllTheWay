@@ -4,7 +4,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,11 +19,14 @@ import com.cloundwisdom.im.common.greendao.SignEntryDao;
 import com.cloundwisdom.im.common.greendao.UserEntryDao;
 import com.cloundwisdom.im.common.view.CustomDialog;
 import com.cloundwisdom.im.common.web.BrowserActivity;
+import com.cloundwisdom.im.modules.entry.greendao.entry.UserEntry;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import com.hjq.base.helper.ActivityStackManager;
 import com.hjq.base.web.SonicJavaScriptInterface;
 import com.hjq.toast.ToastUtils;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -46,9 +51,7 @@ public abstract class MyActivity<V, T extends BasePresenter<V>> extends UIActivi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityStackManager.getInstance().onActivityCreated(this);
-        ARouter.getInstance().inject(this);
-        signEntryDao= MyApplication.mInstance.getDaoSession().getSignEntryDao();
-        userEntryDao=MyApplication.mInstance.getDaoSession().getUserEntryDao();
+
     }
 
     private Unbinder mButterKnife;//View注解
@@ -63,6 +66,9 @@ public abstract class MyActivity<V, T extends BasePresenter<V>> extends UIActivi
             }
         }
         mButterKnife = ButterKnife.bind(this);
+        ARouter.getInstance().inject(this);
+        signEntryDao= MyApplication.mInstance.getDaoSession().getSignEntryDao();
+        userEntryDao=MyApplication.mInstance.getDaoSession().getUserEntryDao();
         initOrientation();
     }
 
@@ -240,6 +246,18 @@ public abstract class MyActivity<V, T extends BasePresenter<V>> extends UIActivi
     //用于创建Presenter和判断是否使用MVP模式(由子类实现)
     protected abstract T createPresenter();
 
+    //是否登录
+    public boolean isLogin(){
+        List<UserEntry> list=userEntryDao.loadAll();
+        if (list==null){
+            //登录之前的判断
+
+            return false;
+        }else {
+            return true;
+        }
+    }
+
     /**
      * 不同状态处理
      * @param state
@@ -267,5 +285,23 @@ public abstract class MyActivity<V, T extends BasePresenter<V>> extends UIActivi
         intent.putExtra(BrowserActivity.PARAM_MODE, mode);
         intent.putExtra(SonicJavaScriptInterface.PARAM_CLICK_TIME, System.currentTimeMillis());
         startActivityForResult(intent, -1);
+    }
+
+    //倒计时
+    public void countDownState(TextView textView){
+        CountDownTimer timer = new CountDownTimer(60000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                textView.setEnabled(false);
+                textView.setText(millisUntilFinished / 1000 + "秒后重新获取");
+                textView.setTextColor(Color.parseColor("#8d8d8d"));
+            }
+            @Override
+            public void onFinish() {
+                textView.setEnabled(true);
+                textView.setText("重新获取");
+                textView.setTextColor(Color.parseColor("#0096ff"));
+            }
+        }.start();
     }
 }
